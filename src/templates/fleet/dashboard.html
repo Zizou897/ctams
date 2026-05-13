@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Tableau de bord — Ma flotte | CTAMS{% endblock %}
+
+{% block content %}
+<section class="py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-2xl font-bold text-neutral-900">Tableau de bord</h1>
+        <p class="text-neutral-500 text-sm mt-1">Bonjour, {{ user.profile.company_name|default:user.username }}</p>
+      </div>
+      <a href="{% url 'quotes:request' %}" class="bg-secondary hover:bg-secondary-dark text-white font-semibold px-5 py-3 rounded-xl transition-colors text-sm">
+        + Nouveau devis
+      </a>
+    </div>
+
+    <!-- KPIs -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 mb-10">
+      <div class="bg-white rounded-xl border border-neutral-200 p-5 shadow-sm">
+        <p class="text-sm text-neutral-500 mb-1">Véhicules</p>
+        <p class="text-3xl font-bold text-primary">{{ vehicles.count }}</p>
+      </div>
+      <div class="bg-white rounded-xl border border-neutral-200 p-5 shadow-sm">
+        <p class="text-sm text-neutral-500 mb-1">Interventions totales</p>
+        <p class="text-3xl font-bold text-neutral-900">—</p>
+      </div>
+      <div class="bg-white rounded-xl border border-neutral-200 p-5 shadow-sm">
+        <p class="text-sm text-neutral-500 mb-1">Dernière intervention</p>
+        <p class="text-3xl font-bold text-neutral-900">—</p>
+      </div>
+      <div class="bg-white rounded-xl border border-neutral-200 p-5 shadow-sm">
+        <p class="text-sm text-neutral-500 mb-1">Coût total (FCFA)</p>
+        <p class="text-3xl font-bold text-neutral-900">—</p>
+      </div>
+    </div>
+
+    <!-- Liste des véhicules -->
+    <div class="bg-white rounded-2xl border border-neutral-200 shadow-sm overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
+        <h2 class="font-bold text-neutral-900">Mes véhicules</h2>
+        <a href="{% url 'fleet:vehicle-list' %}" class="text-sm text-primary hover:underline">Voir tout →</a>
+      </div>
+
+      {% if vehicles %}
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-neutral-50 text-neutral-500 font-semibold text-xs uppercase tracking-wider">
+            <tr>
+              <th class="text-left px-6 py-3">Immatriculation</th>
+              <th class="text-left px-6 py-3">Véhicule</th>
+              <th class="text-left px-6 py-3">Type</th>
+              <th class="text-right px-6 py-3">Kilométrage</th>
+              <th class="text-right px-6 py-3">Action</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-100">
+            {% for vehicle in vehicles %}
+            <tr class="hover:bg-neutral-50 transition-colors">
+              <td class="px-6 py-4 font-semibold text-neutral-900">{{ vehicle.license_plate }}</td>
+              <td class="px-6 py-4 text-neutral-700">{{ vehicle.brand }} {{ vehicle.model }} <span class="text-neutral-400">({{ vehicle.year }})</span></td>
+              <td class="px-6 py-4">
+                <span class="inline-block bg-primary-light text-primary text-xs font-semibold px-2 py-1 rounded-full">{{ vehicle.get_vehicle_type_display }}</span>
+              </td>
+              <td class="px-6 py-4 text-right text-neutral-600">{{ vehicle.mileage|floatformat:0 }} km</td>
+              <td class="px-6 py-4 text-right">
+                <a href="{{ vehicle.get_absolute_url }}" class="text-primary hover:underline text-xs font-semibold">Détail →</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="px-6 py-12 text-center">
+        <p class="text-neutral-400 text-sm mb-4">Aucun véhicule enregistré pour l'instant.</p>
+        <a href="{% url 'quotes:request' %}" class="inline-block text-sm text-primary font-semibold hover:underline">
+          Faire une demande d'entretien →
+        </a>
+      </div>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}CTAMS — Entretien & Réparation de Flottes, Abidjan{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Centre Technique Auto & Multi-Services : maintenance de flottes, réparation véhicules et poids lourds à Abidjan. Devis gratuit sous 24h.{% endblock %}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{% block og_title %}CTAMS — Garage Professionnel Abidjan{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Entretien de flottes, réparation toutes natures, lavage. Basé à Riviera Bonoumin, Abidjan.{% endblock %}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_CI">
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  {% block extra_head %}{% endblock %}
+
+  <!-- JSON-LD LocalBusiness -->
+  {% block structured_data %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "CTAMS — Centre Technique Auto & Multi-Services",
+    "description": "Garage professionnel spécialisé dans l'entretien et la réparation de flottes d'entreprises.",
+    "url": "https://ctams.ci",
+    "telephone": "+22507779068 45",
+    "email": "Sasava221@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Riviera Bonoumin, près de la DG Marché Public",
+      "addressLocality": "Abidjan",
+      "addressCountry": "CI"
+    },
+    "openingHours": "Mo-Sa 07:00-19:00",
+    "priceRange": "FCFA"
+  }
+  </script>
+  {% endblock %}
+</head>
+
+<body class="font-sans text-neutral-900 bg-white antialiased">
+
+  <!-- Barre d'annonce -->
+  <div class="bg-primary-dark text-primary-light hidden sm:block">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between text-xs">
+      <div class="flex items-center gap-6">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+          </svg>
+          <a href="tel:+2250777906845" class="hover:text-white transition-colors">07 77 90 68 45</a>
+          &nbsp;/&nbsp;
+          <a href="tel:+2250505216792" class="hover:text-white transition-colors">05 05 21 67 92</a>
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+          </svg>
+          Sasava221@gmail.com
+        </span>
+      </div>
+      <span class="flex items-center gap-1.5">
+        <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+        </svg>
+        Lun – Sam &nbsp;·&nbsp; 07h00 – 19h00
+      </span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-50 bg-white border-b border-neutral-100 shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="{% url 'core:home' %}" class="flex items-center flex-shrink-0">
+          <img src="{% static 'img/ctams-logo.jpg' %}" alt="CTAMS — Centre Technique Auto & Multi-Services"
+               class="h-12 w-auto" width="180" height="48">
+        </a>
+
+        <!-- Liens desktop -->
+        <div class="hidden md:flex items-center gap-1">
+          <a href="{% url 'core:home' %}" class="px-4 py-2 text-sm font-medium text-neutral-600 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Accueil</a>
+          <a href="{% url 'services:list' %}" class="px-4 py-2 text-sm font-medium text-neutral-600 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Services</a>
+          <a href="{% url 'core:about' %}" class="px-4 py-2 text-sm font-medium text-neutral-600 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">À propos</a>
+          <a href="{% url 'core:contact' %}" class="px-4 py-2 text-sm font-medium text-neutral-600 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Contact</a>
+        </div>
+
+        <!-- CTA + hamburger -->
+        <div class="flex items-center gap-3">
+          <a href="{% url 'quotes:request' %}" class="hidden sm:inline-flex items-center gap-2 bg-secondary hover:bg-secondary-dark text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            Devis gratuit
+          </a>
+          <button id="menu-toggle" class="md:hidden p-2 rounded-lg text-neutral-500 hover:bg-neutral-100 transition-colors" aria-label="Menu">
+            <svg id="icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+            <svg id="icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Menu mobile -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-neutral-100 bg-white">
+      <div class="px-4 py-4 space-y-1">
+        <a href="{% url 'core:home' %}" class="block px-4 py-2.5 text-sm font-medium text-neutral-700 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Accueil</a>
+        <a href="{% url 'services:list' %}" class="block px-4 py-2.5 text-sm font-medium text-neutral-700 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Services</a>
+        <a href="{% url 'core:about' %}" class="block px-4 py-2.5 text-sm font-medium text-neutral-700 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">À propos</a>
+        <a href="{% url 'core:contact' %}" class="block px-4 py-2.5 text-sm font-medium text-neutral-700 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Contact</a>
+        <div class="pt-3 border-t border-neutral-100">
+          <a href="{% url 'quotes:request' %}" class="flex items-center justify-center gap-2 bg-secondary hover:bg-secondary-dark text-white font-semibold py-3 rounded-lg text-sm transition-colors">
+            Devis gratuit
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Messages flash -->
+  {% if messages %}
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 space-y-2">
+    {% for msg in messages %}
+    <div class="px-4 py-3 rounded-lg text-sm font-medium
+      {% if msg.tags == 'success' %}bg-green-50 text-green-800 border border-green-200
+      {% elif msg.tags == 'error' %}bg-red-50 text-red-800 border border-red-200
+      {% else %}bg-blue-50 text-blue-800 border border-blue-200{% endif %}">
+      {{ msg }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Contenu de la page -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-900 text-neutral-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+        <!-- Marque -->
+        <div>
+          <img src="{% static 'img/ctams-logo.jpg' %}" alt="CTAMS"
+               class="h-12 w-auto mb-5 brightness-0 invert" width="180" height="48">
+          <p class="text-sm leading-relaxed mb-5">
+            Votre partenaire technique pour la maintenance et la réparation de flottes professionnelles à Abidjan.
+          </p>
+          <div class="flex items-center gap-2 text-xs text-neutral-500">
+            <span class="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></span>
+            Disponible Lun – Sam · 07h – 19h
+          </div>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <p class="text-white text-xs font-bold uppercase tracking-widest mb-5">Services</p>
+          <ul class="space-y-3 text-sm">
+            <li><a href="{% url 'services:list' %}" class="hover:text-white transition-colors">Entretien de flotte</a></li>
+            <li><a href="{% url 'services:list' %}" class="hover:text-white transition-colors">Mécanique générale</a></li>
+            <li><a href="{% url 'services:list' %}" class="hover:text-white transition-colors">Électricité automobile</a></li>
+            <li><a href="{% url 'services:list' %}" class="hover:text-white transition-colors">Tôlerie & Peinture</a></li>
+            <li><a href="{% url 'services:list' %}" class="hover:text-white transition-colors">Diagnostic électronique</a></li>
+          </ul>
+        </div>
+
+        <!-- Navigation -->
+        <div>
+          <p class="text-white text-xs font-bold uppercase tracking-widest mb-5">Navigation</p>
+          <ul class="space-y-3 text-sm">
+            <li><a href="{% url 'core:home' %}" class="hover:text-white transition-colors">Accueil</a></li>
+            <li><a href="{% url 'core:about' %}" class="hover:text-white transition-colors">À propos</a></li>
+            <li><a href="{% url 'core:contact' %}" class="hover:text-white transition-colors">Contact</a></li>
+            <li><a href="{% url 'quotes:request' %}" class="hover:text-white transition-colors">Demander un devis</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <p class="text-white text-xs font-bold uppercase tracking-widest mb-5">Contact</p>
+          <ul class="space-y-4 text-sm">
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-primary-light" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+              </svg>
+              <a href="tel:+2250777906845" class="hover:text-white transition-colors block">07 77 90 68 45</a>
+              <a href="tel:+2250505216792" class="hover:text-white transition-colors block">05 05 21 67 92</a>
+            </li>
+            <li class="flex items-center gap-3">
+              <svg class="w-4 h-4 flex-shrink-0 text-primary-light" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+              </svg>
+              Sasava221@gmail.com
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-primary-light" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+              </svg>
+              <span>Riviera Bonoumin<br>Abidjan, Côte d'Ivoire</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barre de bas de page -->
+    <div class="border-t border-neutral-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-neutral-600">
+        <span>© {% now "Y" %} CTAMS — Centre Technique Auto & Multi-Services. Tous droits réservés.</span>
+        <span>Riviera Bonoumin · Abidjan · Côte d'Ivoire</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Menu mobile JS -->
+  <script>
+    (function () {
+      var btn = document.getElementById('menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      var iconOpen = document.getElementById('icon-open');
+      var iconClose = document.getElementById('icon-close');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          var isHidden = menu.classList.toggle('hidden');
+          iconOpen.classList.toggle('hidden', !isHidden);
+          iconClose.classList.toggle('hidden', isHidden);
+        });
+      }
+    })();
+  </script>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  /* Bleu cobalt du logo CTAMS */
+  --color-primary: #2133B0;
+  --color-primary-dark: #172590;
+  --color-primary-light: #E0E7FF;
+  /* Rouge vif du logo CTAMS */
+  --color-secondary: #CC1111;
+  --color-secondary-dark: #A50D0D;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* Pattern de points blancs — hero sombre */
+@utility bg-dots-white {
+  background-image: radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Grille fine — section sombre */
+@utility bg-grid-white {
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(255,255,255,0.04) 47px, rgba(255,255,255,0.04) 48px),
+    repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(255,255,255,0.04) 47px, rgba(255,255,255,0.04) 48px);
+}

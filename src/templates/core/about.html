@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+{% block title %}À propos — CTAMS, Garage Professionnel Abidjan{% endblock %}
+{% block meta_description %}CTAMS : 5 ans d'expérience, 8 techniciens spécialisés, plus de 60 véhicules entretenus par mois à Riviera Bonoumin, Abidjan.{% endblock %}
+{% block og_title %}À propos de CTAMS — Centre Technique Auto & Multi-Services{% endblock %}
+{% block og_description %}Un garage professionnel construit sur un principe simple : intervenir vite, intervenir bien.{% endblock %}
+
+{% block content %}
+
+<!-- ═══ HERO ═══ -->
+<section class="relative bg-primary-dark overflow-hidden py-20">
+  <div class="absolute inset-0 bg-dots-white opacity-50"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-4">Qui sommes-nous</p>
+    <h1 class="text-5xl font-extrabold text-white mb-5 tracking-tight">Centre Technique Auto<br>& Multi-Services</h1>
+    <p class="text-primary-light text-lg max-w-2xl">Un garage professionnel construit sur un principe simple : intervenir vite, intervenir bien.</p>
+  </div>
+  <div class="absolute bottom-0 left-0 right-0 h-10 bg-white pointer-events-none"
+       style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+</section>
+
+<!-- ═══ NOTRE HISTOIRE + CHIFFRES ═══ -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+      <!-- Texte -->
+      <div>
+        <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-4">Notre histoire</p>
+        <h2 class="text-3xl font-extrabold text-neutral-900 mb-6">Un partenaire technique de confiance</h2>
+        <div class="space-y-5 text-neutral-600 leading-relaxed">
+          <p>Le Centre Technique Auto & Multi-Services (CTAMS) est un garage professionnel spécialisé dans l'entretien, la réparation et la valorisation de véhicules particuliers et de flottes d'entreprises, situé à <strong class="text-neutral-900">Riviera Bonoumin, Abidjan</strong>, à proximité de la Direction Générale du Marché Public.</p>
+          <p>Depuis notre création, nous avons développé une expertise solide et pluridisciplinaire, avec des équipes techniques formées aux dernières technologies automobiles. CTAMS est aujourd'hui un acteur reconnu dans la maintenance de flottes lourdes et légères, opérant aussi bien pour des clients basés à Abidjan que sur des sites industriels en Côte d'Ivoire.</p>
+        </div>
+
+        <!-- Citation gérant -->
+        <div class="mt-10 relative pl-6 border-l-4 border-secondary">
+          <p class="text-neutral-700 italic leading-relaxed text-base">
+            « Dans un contexte où la mobilité est au cœur de la performance des entreprises, la fiabilité de votre flotte ne peut pas être laissée au hasard. Chez CTAMS, nous intervenons vite, bien, et remettons vos véhicules sur la route dans les meilleurs délais. »
+          </p>
+          <div class="flex items-center gap-3 mt-5">
+            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+              <span class="text-white font-bold">S</span>
+            </div>
+            <div>
+              <p class="font-bold text-neutral-900 text-sm">M. Savadogo Salif</p>
+              <p class="text-neutral-500 text-xs">Gérant — CTAMS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chiffres clés -->
+      <div class="grid grid-cols-2 gap-5">
+        {% for stat in stats %}
+        <div class="bg-neutral-50 border border-neutral-100 rounded-2xl p-7 text-center hover:border-primary hover:shadow-md transition-all">
+          <p class="text-5xl font-extrabold text-primary mb-2">{{ stat.value }}</p>
+          <p class="text-sm text-neutral-500 font-medium">{{ stat.label }}</p>
+        </div>
+        {% empty %}
+        <div class="bg-neutral-50 border border-neutral-100 rounded-2xl p-7 text-center hover:border-primary hover:shadow-md transition-all">
+          <p class="text-5xl font-extrabold text-primary mb-2">5<span class="text-secondary">+</span></p>
+          <p class="text-sm text-neutral-500 font-medium">Années d'expérience</p>
+        </div>
+        <div class="bg-neutral-50 border border-neutral-100 rounded-2xl p-7 text-center hover:border-primary hover:shadow-md transition-all">
+          <p class="text-5xl font-extrabold text-primary mb-2">8</p>
+          <p class="text-sm text-neutral-500 font-medium">Techniciens spécialisés</p>
+        </div>
+        <div class="bg-neutral-50 border border-neutral-100 rounded-2xl p-7 text-center hover:border-primary hover:shadow-md transition-all">
+          <p class="text-5xl font-extrabold text-primary mb-2">60<span class="text-secondary">+</span></p>
+          <p class="text-sm text-neutral-500 font-medium">Véhicules / mois</p>
+        </div>
+        <div class="bg-neutral-50 border border-neutral-100 rounded-2xl p-7 text-center hover:border-primary hover:shadow-md transition-all">
+          <p class="text-5xl font-extrabold text-primary mb-2">100<span class="text-sm">%</span></p>
+          <p class="text-sm text-neutral-500 font-medium">Fournitures incluses</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOMAINES D'EXPERTISE ═══ -->
+<section class="py-20 bg-neutral-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-3">Savoir-faire</p>
+      <h2 class="text-3xl font-extrabold text-neutral-900">Nos domaines d'expertise</h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {% for domain in domains %}
+      <div class="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:border-primary hover:shadow-md transition-all">
+        <p class="font-bold text-neutral-900 mb-2">{{ domain.name }}</p>
+        <p class="text-sm text-neutral-500 leading-relaxed">{{ domain.detail }}</p>
+      </div>
+      {% empty %}
+      <div class="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:border-primary hover:shadow-md transition-all">
+        <p class="font-bold text-neutral-900 mb-2">Mécanique générale</p>
+        <p class="text-sm text-neutral-500">Moteurs, transmissions, freinage, suspensions</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:border-primary hover:shadow-md transition-all">
+        <p class="font-bold text-neutral-900 mb-2">Électricité auto</p>
+        <p class="text-sm text-neutral-500">Diagnostic scanner, alternateurs, câblage, capteurs</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:border-primary hover:shadow-md transition-all">
+        <p class="font-bold text-neutral-900 mb-2">Tôlerie & Carrosserie</p>
+        <p class="text-sm text-neutral-500">Réparations, redressement, protection corrosion</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:border-primary hover:shadow-md transition-all">
+        <p class="font-bold text-neutral-900 mb-2">Peinture</p>
+        <p class="text-sm text-neutral-500">Retouches, éléments complets, apprêt & finition</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:border-primary hover:shadow-md transition-all">
+        <p class="font-bold text-neutral-900 mb-2">Entretien préventif</p>
+        <p class="text-sm text-neutral-500">Vidanges, filtres, graissage, révisions périodiques</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:border-primary hover:shadow-md transition-all">
+        <p class="font-bold text-neutral-900 mb-2">Vulcanisation</p>
+        <p class="text-sm text-neutral-500">Montage, équilibrage, réparation crevaisons</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:border-primary hover:shadow-md transition-all">
+        <p class="font-bold text-neutral-900 mb-2">Diagnostic électronique</p>
+        <p class="text-sm text-neutral-500">Scanner OBD2, lecture & effacement codes défauts</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-neutral-100 shadow-sm hover:border-primary hover:shadow-md transition-all">
+        <p class="font-bold text-neutral-900 mb-2">Lavage & Nettoyage</p>
+        <p class="text-sm text-neutral-500">Haute pression, habitacle, dégraissage châssis</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══ POURQUOI NOUS CHOISIR ═══ -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-3">Nos engagements</p>
+      <h2 class="text-3xl font-extrabold text-neutral-900">Pourquoi choisir CTAMS ?</h2>
+    </div>
+
+    <!-- Top 3 arguments — visuellement dominants -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+
+      <div class="bg-primary-dark rounded-2xl p-8 text-white">
+        <div class="w-14 h-14 bg-secondary/20 rounded-xl flex items-center justify-center mb-5">
+          <svg class="w-7 h-7 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="font-extrabold text-white text-lg mb-3">Réactivité 24h</h3>
+        <p class="text-primary-light text-sm leading-relaxed">Mobilisables sous 24h pour les urgences. Critique pour les mines, BTP et sites industriels — votre immobilisation ne peut pas attendre.</p>
+      </div>
+
+      <div class="bg-primary rounded-2xl p-8 text-white">
+        <div class="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-5">
+          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+        </div>
+        <h3 class="font-extrabold text-white text-lg mb-3">Tarification transparente</h3>
+        <p class="text-primary-light text-sm leading-relaxed">Devis gratuit et détaillé avant toute intervention. Aucun frais caché. Remise 10–15% sur main-d'œuvre et pièces pour les flottes sous contrat.</p>
+      </div>
+
+      <div class="bg-neutral-900 rounded-2xl p-8 text-white">
+        <div class="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-5">
+          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-extrabold text-white text-lg mb-3">Reporting & traçabilité</h3>
+        <p class="text-neutral-400 text-sm leading-relaxed">Rapport détaillé après chaque intervention, historique complet par véhicule. Ce que vos DRH et directeurs de flotte exigent de leurs prestataires.</p>
+      </div>
+    </div>
+
+    <!-- 3 arguments complémentaires -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+      <div class="flex gap-4 bg-neutral-50 border border-neutral-100 rounded-2xl p-6">
+        <div class="w-11 h-11 bg-primary-light rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-neutral-900 mb-1.5">Expertise technique</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">Techniciens formés, outillage professionnel, diagnostic électronique OBD2 dernière génération.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 bg-neutral-50 border border-neutral-100 rounded-2xl p-6">
+        <div class="w-11 h-11 bg-primary-light rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-neutral-900 mb-1.5">Solution clé en main</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">Pièces, main-d'œuvre, déplacement, rapport : tout est géré par CTAMS. Un seul interlocuteur.</p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 bg-neutral-50 border border-neutral-100 rounded-2xl p-6">
+        <div class="w-11 h-11 bg-primary-light rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-neutral-900 mb-1.5">Proximité & disponibilité</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">Riviera Bonoumin, Abidjan. Interventions sur site possibles. Joignables 6j/7.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="py-20 bg-neutral-50">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-extrabold text-neutral-900 mb-5">Prêt à confier votre flotte à CTAMS ?</h2>
+    <p class="text-neutral-500 text-lg mb-8">Contactez-nous dès aujourd'hui pour un audit gratuit de votre parc véhicules.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="{% url 'quotes:request' %}"
+         class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary-dark text-white font-bold px-8 py-4 rounded-xl transition-colors shadow-lg">
+        Demander un devis gratuit
+      </a>
+      <a href="{% url 'core:contact' %}"
+         class="inline-flex items-center justify-center gap-2 border border-neutral-300 hover:border-primary text-neutral-700 hover:text-primary font-semibold px-8 py-4 rounded-xl transition-colors">
+        Nous contacter
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

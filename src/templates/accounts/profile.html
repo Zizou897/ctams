@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Mon profil — CTAMS{% endblock %}
+
+{% block content %}
+<section class="py-16">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-2xl font-bold text-neutral-900 mb-8">Mon profil</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- Infos -->
+      <div class="md:col-span-2 space-y-6">
+        <div class="bg-white rounded-xl border border-neutral-200 p-6 shadow-sm">
+          <h2 class="font-semibold text-neutral-900 mb-4">Informations du compte</h2>
+          <dl class="space-y-3 text-sm">
+            <div class="flex gap-4">
+              <dt class="w-32 text-neutral-500 font-medium">Identifiant</dt>
+              <dd class="text-neutral-900">{{ user.username }}</dd>
+            </div>
+            <div class="flex gap-4">
+              <dt class="w-32 text-neutral-500 font-medium">Email</dt>
+              <dd class="text-neutral-900">{{ user.email }}</dd>
+            </div>
+            {% if user.profile %}
+            <div class="flex gap-4">
+              <dt class="w-32 text-neutral-500 font-medium">Entreprise</dt>
+              <dd class="text-neutral-900">{{ user.profile.company_name }}</dd>
+            </div>
+            <div class="flex gap-4">
+              <dt class="w-32 text-neutral-500 font-medium">Téléphone</dt>
+              <dd class="text-neutral-900">{{ user.profile.phone|default:"—" }}</dd>
+            </div>
+            <div class="flex gap-4">
+              <dt class="w-32 text-neutral-500 font-medium">Flotte</dt>
+              <dd class="text-neutral-900">{{ user.profile.fleet_size }} véhicule{{ user.profile.fleet_size|pluralize }}</dd>
+            </div>
+            {% endif %}
+          </dl>
+        </div>
+      </div>
+
+      <!-- Actions rapides -->
+      <div class="space-y-4">
+        <a href="{% url 'fleet:dashboard' %}" class="block bg-primary text-white text-center font-semibold py-3 px-4 rounded-xl hover:bg-primary-dark transition-colors text-sm">
+          Voir ma flotte
+        </a>
+        <a href="{% url 'quotes:request' %}" class="block bg-secondary text-white text-center font-semibold py-3 px-4 rounded-xl hover:bg-secondary-dark transition-colors text-sm">
+          Nouveau devis
+        </a>
+        <a href="{% url 'accounts:logout' %}" class="block border border-neutral-300 text-neutral-600 text-center font-semibold py-3 px-4 rounded-xl hover:bg-neutral-50 transition-colors text-sm">
+          Déconnexion
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

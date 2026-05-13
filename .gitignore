@@ -61,6 +61,12 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
+# Tailwind CLI (binaire lourd, pas à commiter)
+tailwindcss.exe
+src/tailwindcss.exe
+# Le CSS buildé est commité (pas de CI/CD de build pour l'instant)
+# src/static/css/main.css  ← laisser commité
+
 # Flask stuff:
 instance/
 .webassets-cache
@@ -179,3 +185,4 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+.claude

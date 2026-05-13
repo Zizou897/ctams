@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block title %}Nos Services — Entretien, Réparation & Flotte | CTAMS Abidjan{% endblock %}
+{% block meta_description %}Découvrez tous les services CTAMS : entretien de flotte, mécanique, électricité auto, tôlerie, peinture, vulcanisation à Abidjan. Tarifs en FCFA.{% endblock %}
+{% block og_title %}Services & Tarifs — CTAMS Garage Professionnel Abidjan{% endblock %}
+{% block og_description %}Catalogue complet des services CTAMS. Main-d'œuvre uniquement. Remise 10–15% pour les clients sous contrat de flotte.{% endblock %}
+
+{% block content %}
+
+<!-- ═══ HERO ═══ -->
+<section class="relative bg-primary-dark overflow-hidden py-20">
+  <div class="absolute inset-0 bg-dots-white opacity-50"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-4">Catalogue complet</p>
+    <h1 class="text-5xl font-extrabold text-white mb-5 tracking-tight">Nos services & tarifs</h1>
+    <p class="text-primary-light text-lg max-w-2xl">Main-d'œuvre uniquement. Pièces facturées en sus au prix du marché. <strong class="text-white">Remise 10–15%</strong> pour les clients sous contrat de flotte.</p>
+  </div>
+  <div class="absolute bottom-0 left-0 right-0 h-10 bg-white pointer-events-none"
+       style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+</section>
+
+<!-- ═══ GRILLE TARIFAIRE ═══ -->
+<section class="py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    {% if services %}
+    {% regroup services by get_category_display as category_groups %}
+    {% for group in category_groups %}
+    <div class="mb-14">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-1 h-7 bg-secondary rounded-full flex-shrink-0"></span>
+        <h2 class="text-xl font-extrabold text-neutral-900">{{ group.grouper }}</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+        {% for service in group.list %}
+        <a href="{{ service.get_absolute_url }}"
+           class="bg-white border border-neutral-100 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:border-primary transition-all group flex flex-col">
+          <div class="flex items-start justify-between mb-2 gap-2">
+            <h3 class="font-bold text-neutral-900 group-hover:text-primary transition-colors">{{ service.name }}</h3>
+            <span class="flex-shrink-0 inline-flex items-center gap-1 bg-green-50 border border-green-200 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap">
+              Flotte −15%
+            </span>
+          </div>
+          <p class="text-sm text-neutral-500 mb-4 leading-relaxed flex-1">{{ service.description|truncatewords:20 }}</p>
+          <div class="flex items-center justify-between pt-3 border-t border-neutral-50">
+            <div>
+              <span class="text-primary font-bold text-sm">VL : {{ service.price_display_light }}</span>
+              <span class="text-neutral-300 text-xs ml-1">· MO uniquement</span>
+            </div>
+            <svg class="w-4 h-4 text-neutral-300 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+    {% include "services/_tariff_table.html" %}
+    {% endif %}
+
+  </div>
+</section>
+
+<!-- ═══ CTA INTERMÉDIAIRE ═══ -->
+<section class="py-10 bg-white border-t border-neutral-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div>
+      <p class="font-bold text-neutral-900">Vous gérez une flotte de 5 véhicules ou plus ?</p>
+      <p class="text-sm text-neutral-500">Bénéficiez d'un contrat Premium avec remise 10–15% sur toutes les interventions.</p>
+    </div>
+    <a href="{% url 'quotes:request' %}"
+       class="flex-shrink-0 inline-flex items-center gap-2 bg-secondary hover:bg-secondary-dark text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-sm whitespace-nowrap shadow-lg">
+      Obtenir un devis flotte
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ FORMULES ═══ -->
+<section class="py-20 bg-neutral-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-3">Engagements</p>
+      <h2 class="text-4xl font-extrabold text-neutral-900 mb-4">Trois niveaux d'engagement</h2>
+      <p class="text-neutral-500 max-w-xl mx-auto">Choisissez la formule adaptée à la taille et aux besoins de votre parc véhicules.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+
+      <!-- Formule Essentiel -->
+      <div class="bg-white rounded-3xl border border-neutral-200 p-9 shadow-sm flex flex-col">
+        <div class="mb-6">
+          <p class="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-2">Formule</p>
+          <h3 class="text-2xl font-extrabold text-neutral-900">Essentiel</h3>
+          <p class="text-xs text-neutral-400 mt-2">Idéal pour véhicules isolés ou interventions ponctuelles.</p>
+        </div>
+        <ul class="space-y-3 text-sm text-neutral-600 flex-1 mb-8">
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Interventions ponctuelles
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Réparations à la demande
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Devis avant intervention
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Facturation à l'acte
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Délai standard 24–48h
+          </li>
+        </ul>
+        <a href="{% url 'quotes:request' %}"
+           class="block text-center border border-primary text-primary hover:bg-primary hover:text-white font-bold py-3.5 rounded-xl transition-colors text-sm">
+          Demander un devis
+        </a>
+      </div>
+
+      <!-- Formule Premium (mise en avant) -->
+      <div class="bg-primary rounded-3xl p-9 shadow-2xl flex flex-col relative">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+          <span class="bg-secondary text-white text-xs font-bold px-5 py-1.5 rounded-full shadow-lg uppercase tracking-wide">Recommandé</span>
+        </div>
+        <div class="mb-6">
+          <p class="text-xs font-bold text-primary-light uppercase tracking-widest mb-2">Formule</p>
+          <h3 class="text-2xl font-extrabold text-white">Premium</h3>
+          <p class="text-xs text-primary-light/70 mt-2">Idéal pour flottes de 5 véhicules et plus.</p>
+        </div>
+        <ul class="space-y-3 text-sm text-primary-light flex-1 mb-8">
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Contrat mensuel de flotte
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Entretiens préventifs planifiés
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Priorité d'intervention
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Rapport mensuel inclus
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <strong class="text-white">Remise 10–15%</strong> MO & pièces
+          </li>
+        </ul>
+        <a href="{% url 'quotes:request' %}"
+           class="block text-center bg-white text-primary hover:bg-primary-light font-bold py-3.5 rounded-xl transition-colors text-sm">
+          Demander un devis
+        </a>
+      </div>
+
+      <!-- Formule Sur-mesure -->
+      <div class="bg-white rounded-3xl border border-neutral-200 p-9 shadow-sm flex flex-col">
+        <div class="mb-6">
+          <p class="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-2">Formule</p>
+          <h3 class="text-2xl font-extrabold text-neutral-900">Sur-mesure</h3>
+          <p class="text-xs text-neutral-400 mt-2">Idéal pour grandes flottes et sites industriels.</p>
+        </div>
+        <ul class="space-y-3 text-sm text-neutral-600 flex-1 mb-8">
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Contrat dédié & exclusif
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Technicien(s) dédié(s)
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Intervention sur site
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            SLA personnalisé
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="w-5 h-5 bg-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Conditions tarifaires négociées
+          </li>
+        </ul>
+        <a href="{% url 'quotes:request' %}"
+           class="block text-center border border-primary text-primary hover:bg-primary hover:text-white font-bold py-3.5 rounded-xl transition-colors text-sm">
+          Nous contacter
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

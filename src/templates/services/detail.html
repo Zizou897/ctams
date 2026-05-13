@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}{{ service.name }} — CTAMS Abidjan{% endblock %}
+{% block meta_description %}{{ service.description|truncatewords:25 }} Tarif : {{ service.price_display_light }}. Devis gratuit CTAMS Abidjan.{% endblock %}
+{% block og_title %}{{ service.name }} | CTAMS{% endblock %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<div class="bg-neutral-50 border-b border-neutral-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+    <nav class="text-sm text-neutral-500 flex gap-2 items-center">
+      <a href="{% url 'core:home' %}" class="hover:text-primary transition-colors">Accueil</a>
+      <span>/</span>
+      <a href="{% url 'services:list' %}" class="hover:text-primary transition-colors">Services</a>
+      <span>/</span>
+      <span class="text-neutral-900">{{ service.name }}</span>
+    </nav>
+  </div>
+</div>
+
+<section class="py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+      <!-- Contenu principal -->
+      <div class="lg:col-span-2">
+        <span class="inline-block bg-primary-light text-primary text-xs font-semibold px-3 py-1 rounded-full mb-4">{{ service.get_category_display }}</span>
+        <h1 class="text-3xl font-bold text-neutral-900 mb-4">{{ service.name }}</h1>
+        <p class="text-neutral-600 leading-relaxed text-lg mb-8">{{ service.description }}</p>
+
+        <!-- Tarifs -->
+        <div class="bg-neutral-50 rounded-xl border border-neutral-200 p-6 mb-8">
+          <h2 class="font-bold text-neutral-900 mb-4">Tarifs indicatifs (main-d'œuvre)</h2>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white rounded-lg p-4 border border-neutral-100">
+              <p class="text-xs text-neutral-500 mb-1">Véhicule léger / Utilitaire</p>
+              <p class="text-lg font-bold text-primary">{{ service.price_display_light }}</p>
+            </div>
+            <div class="bg-white rounded-lg p-4 border border-neutral-100">
+              <p class="text-xs text-neutral-500 mb-1">Poids lourd / Engin</p>
+              {% if service.price_heavy_min and service.price_heavy_max %}
+              <p class="text-lg font-bold text-neutral-700">{{ service.price_heavy_min|floatformat:0 }} – {{ service.price_heavy_max|floatformat:0 }} FCFA</p>
+              {% else %}
+              <p class="text-lg font-bold text-neutral-700">Sur devis</p>
+              {% endif %}
+            </div>
+          </div>
+          <p class="text-xs text-neutral-400 mt-4">* Pièces de rechange facturées en sus. Remise 10–15% sous contrat de flotte.</p>
+        </div>
+      </div>
+
+      <!-- Sidebar CTA -->
+      <div class="space-y-6">
+        <div class="bg-primary rounded-2xl p-6 text-white sticky top-24">
+          <h3 class="font-bold text-lg mb-2">Demander ce service</h3>
+          <p class="text-blue-100 text-sm mb-5">Devis gratuit et détaillé sous 24h. Aucun frais caché.</p>
+          <a href="{% url 'quotes:request' %}" class="block text-center bg-secondary hover:bg-secondary-dark text-white font-bold py-4 rounded-xl transition-colors">
+            Obtenir un devis gratuit
+          </a>
+          <div class="mt-5 pt-5 border-t border-white/20 space-y-3 text-sm text-blue-100">
+            <div class="flex gap-2 items-center">
+              <span>📞</span>
+              <a href="tel:+22507779068 45" class="hover:text-white transition-colors">07 77 90 68 45</a>
+            </div>
+            <div class="flex gap-2 items-center">
+              <span>📧</span>
+              <a href="mailto:Sasava221@gmail.com" class="hover:text-white transition-colors">Sasava221@gmail.com</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="{% url 'services:list' %}" class="flex items-center gap-2 text-sm text-neutral-500 hover:text-primary transition-colors">
+          ← Retour aux services
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Mes véhicules — CTAMS{% endblock %}
+
+{% block content %}
+<section class="py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-2xl font-bold text-neutral-900">Mes véhicules</h1>
+        <p class="text-neutral-500 text-sm mt-1">{{ vehicles.count }} véhicule{{ vehicles.count|pluralize }} enregistré{{ vehicles.count|pluralize }}</p>
+      </div>
+      <a href="{% url 'fleet:dashboard' %}" class="text-sm text-neutral-500 hover:text-primary transition-colors">← Tableau de bord</a>
+    </div>
+
+    {% if vehicles %}
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {% for vehicle in vehicles %}
+      <a href="{{ vehicle.get_absolute_url }}" class="bg-white rounded-2xl border border-neutral-200 p-6 shadow-sm hover:shadow-md hover:border-primary/30 transition group">
+        <div class="flex items-start justify-between mb-4">
+          <span class="inline-block bg-primary-light text-primary text-xs font-semibold px-3 py-1 rounded-full">
+            {{ vehicle.get_vehicle_type_display }}
+          </span>
+          <span class="text-xs text-neutral-400">{{ vehicle.year }}</span>
+        </div>
+        <h2 class="text-lg font-bold text-neutral-900 mb-1 group-hover:text-primary transition-colors">
+          {{ vehicle.license_plate }}
+        </h2>
+        <p class="text-neutral-600 text-sm mb-4">{{ vehicle.brand }} {{ vehicle.model }}</p>
+        <div class="border-t border-neutral-100 pt-4 flex items-center justify-between text-xs text-neutral-500">
+          <span>{{ vehicle.mileage|floatformat:0 }} km</span>
+          <span class="text-primary font-semibold group-hover:underline">Voir les interventions →</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="bg-white rounded-2xl border border-neutral-200 p-16 text-center">
+      <p class="text-neutral-400 mb-4">Aucun véhicule dans votre flotte.</p>
+      <a href="{% url 'quotes:request' %}" class="inline-block bg-primary text-white font-semibold px-6 py-3 rounded-xl hover:bg-primary-dark transition-colors text-sm">
+        Demander un entretien
+      </a>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}
