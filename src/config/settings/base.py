@@ -6,7 +6,7 @@ config = AutoConfig(search_path=BASE_DIR)
 
 SECRET_KEY = config("SECRET_KEY")
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv(), default="")
+ALLOWED_HOSTS = ['*']
 
 DJANGO_APPS = [
     "django.contrib.admin",
