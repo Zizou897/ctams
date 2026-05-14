@@ -6,7 +6,7 @@ config = AutoConfig(search_path=BASE_DIR)
 
 SECRET_KEY = config("SECRET_KEY")
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['187.124.222.161', 'ctams.net', 'www.ctams.net']
 
 DJANGO_APPS = [
     "django.contrib.admin",
