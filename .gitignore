@@ -60,6 +60,10 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+static_cdn/
+media_cdn/
+staticfiles/
+media/
 
 # Tailwind CLI (binaire lourd, pas à commiter)
 tailwindcss.exe
