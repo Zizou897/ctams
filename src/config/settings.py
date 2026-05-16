@@ -10,6 +10,7 @@ ALLOWED_HOSTS = ["187.124.222.161","ctams.net", "www.ctams.net"]
 #ALLOWED_HOSTS = ["*"]
 
 DJANGO_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -23,6 +24,7 @@ THIRD_PARTY_APPS = [
     "tinymce",
     "colorfield",
     "corsheaders",
+    "sweetify",
 ]
 
 LOCAL_APPS = [
@@ -95,6 +97,16 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media_cdn"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Jazzmin
+JAZZMIN_SETTINGS = {
+    "site_title": "Admin CTAMS",
+    "site_header": "CTAMS",
+    "site_brand": "CTAMS",
+    "show_ui_builder": False,
+    "copyright": "CTAMS — Centre Technique Auto & Multi-Services",
+}
+JAZZMIN_UI_TWEAKS = {"theme": "cyborg"}
 
 EMAIL_BACKEND = config("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 EMAIL_HOST = config("EMAIL_HOST", default="smtp.gmail.com")
