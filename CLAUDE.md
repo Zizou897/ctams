@@ -1,6 +1,6 @@
 # CTAMS — Centre Technique Auto & Multi-Services
 
-Plateforme web Django pour la gestion de flotte et la proposition commerciale B2B d'un garage automobile professionnel basé à Abidjan (Riviera Bonoumin).
+Plateforme web Django pour la gestion de flotte et la proposition commerciale B2B d'un garage automobile professionnel basé à Abidjan (Angré nouveau CHU, non loin de Val d'Oise).
 
 ## Contexte métier
 - Client : M. Savadogo Salif, Gérant CTAMS

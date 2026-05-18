@@ -10,7 +10,7 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content="{% block og_title %}CTAMS — Garage Professionnel Abidjan{% endblock %}">
-  <meta property="og:description" content="{% block og_description %}Entretien de flottes, réparation toutes natures, lavage. Basé à Riviera Bonoumin, Abidjan.{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Entretien de flottes, réparation toutes natures, lavage. Basé à Angré nouveau CHU, Abidjan.{% endblock %}">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_CI">
 
@@ -34,7 +34,7 @@
     "email": "Sasava221@gmail.com",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Riviera Bonoumin, près de la DG Marché Public",
+      "streetAddress": "Angré nouveau CHU, non loin de Val d'Oise",
       "addressLocality": "Abidjan",
       "addressCountry": "CI"
     },
@@ -77,7 +77,7 @@
   </div>
 
   <!-- Navigation -->
-  <header class="sticky top-0 z-50 bg-white border-b border-neutral-100 shadow-sm">
+  <header id="main-header" class="sticky top-0 z-50 bg-white border-b border-neutral-100 shadow-sm transition-shadow duration-300">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
 
@@ -285,8 +285,8 @@
                 </svg>
               </span>
               <div class="text-sm">
-                <p class="text-white font-semibold">Riviera Bonoumin</p>
-                <p class="text-neutral-500 text-xs mt-0.5 leading-relaxed">Près de la DG Marché Public<br>Abidjan, Côte d'Ivoire</p>
+                <p class="text-white font-semibold">Angré nouveau CHU</p>
+                <p class="text-neutral-500 text-xs mt-0.5 leading-relaxed">Non loin de Val d'Oise<br>Abidjan, Côte d'Ivoire</p>
               </div>
             </div>
 
@@ -331,7 +331,7 @@
           <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
           </svg>
-          Riviera Bonoumin · Abidjan · Côte d'Ivoire
+          Angré nouveau CHU · Abidjan · Côte d'Ivoire
         </span>
       </div>
     </div>
@@ -351,6 +351,62 @@
           iconOpen.classList.toggle('hidden', !isHidden);
           iconClose.classList.toggle('hidden', isHidden);
         });
+      }
+    })();
+  </script>
+
+  <script>
+    (function () {
+      /* ── Scroll reveal ── */
+      var revealEls = document.querySelectorAll('[data-reveal]');
+      if (revealEls.length && 'IntersectionObserver' in window) {
+        var revealObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              revealObs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(function (el) { revealObs.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('in-view'); });
+      }
+
+      /* ── Counter animation ── */
+      function animateCounter(el) {
+        var target = parseInt(el.getAttribute('data-counter'), 10);
+        var duration = 1800;
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var ease = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(ease * target);
+          if (progress < 1) requestAnimationFrame(step);
+          else el.textContent = target;
+        }
+        requestAnimationFrame(step);
+      }
+      var counterEls = document.querySelectorAll('[data-counter]');
+      if (counterEls.length && 'IntersectionObserver' in window) {
+        var counterObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              animateCounter(entry.target);
+              counterObs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.6 });
+        counterEls.forEach(function (el) { counterObs.observe(el); });
+      }
+
+      /* ── Navbar scroll shadow ── */
+      var header = document.getElementById('main-header');
+      if (header) {
+        window.addEventListener('scroll', function () {
+          header.classList.toggle('nav-scrolled', window.scrollY > 10);
+        }, { passive: true });
       }
     })();
   </script>

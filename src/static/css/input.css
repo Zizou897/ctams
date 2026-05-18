@@ -11,20 +11,18 @@
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 
-/* Pattern de points blancs — hero sombre */
+/* ─────────────────────────────────────────
+   Patterns de fond
+───────────────────────────────────────── */
 @utility bg-dots-white {
   background-image: radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1px);
   background-size: 24px 24px;
 }
-
-/* Grille fine — section sombre */
 @utility bg-grid-white {
   background-image:
     repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(255,255,255,0.04) 47px, rgba(255,255,255,0.04) 48px),
     repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(255,255,255,0.04) 47px, rgba(255,255,255,0.04) 48px);
 }
-
-/* Hero homepage — double grille blueprint technique */
 @utility bg-hero-grid {
   background-image:
     linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
@@ -33,9 +31,132 @@
     linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
 }
-
-/* Banners pages internes — losanges SVG industriels */
 @utility bg-banner-diamond {
   background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 20L20 40L0 20Z' fill='none' stroke='rgba(255%2C255%2C255%2C0.07)' stroke-width='1'/%3E%3C/svg%3E");
   background-size: 40px 40px;
+}
+
+/* ─────────────────────────────────────────
+   KEYFRAMES
+───────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes gearSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.4); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ─────────────────────────────────────────
+   HERO — Entrée séquentielle au chargement
+───────────────────────────────────────── */
+.hero-badge {
+  animation: fadeDown 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+.hero-h1 {
+  animation: fadeUp 0.70s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+.hero-p {
+  animation: fadeUp 0.70s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+.hero-cta {
+  animation: fadeUp 0.70s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both;
+}
+
+/* ─────────────────────────────────────────
+   ENGRENAGES — Rotation lente
+───────────────────────────────────────── */
+.gear-spin {
+  animation: gearSpin 24s linear infinite;
+  transform-origin: center;
+}
+.gear-spin-reverse {
+  animation: gearSpin 18s linear infinite reverse;
+  transform-origin: center;
+}
+
+/* ─────────────────────────────────────────
+   SCROLL REVEAL — Système global
+───────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity  0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-reveal="left"]  { transform: translateX(-36px); }
+[data-reveal="right"] { transform: translateX(36px); }
+[data-reveal="scale"] { transform: scale(0.93); opacity: 0; }
+[data-reveal="fade"]  { transform: none; }
+
+[data-reveal].in-view {
+  opacity: 1;
+  transform: none !important;
+}
+
+/* Délais de cascade */
+[data-delay="50"]  { transition-delay: 50ms; }
+[data-delay="100"] { transition-delay: 100ms; }
+[data-delay="150"] { transition-delay: 150ms; }
+[data-delay="200"] { transition-delay: 200ms; }
+[data-delay="250"] { transition-delay: 250ms; }
+[data-delay="300"] { transition-delay: 300ms; }
+[data-delay="400"] { transition-delay: 400ms; }
+[data-delay="500"] { transition-delay: 500ms; }
+[data-delay="600"] { transition-delay: 600ms; }
+
+/* ─────────────────────────────────────────
+   POINT PULSANT (statut disponible)
+───────────────────────────────────────── */
+.pulse-dot {
+  animation: pulse-dot 2.2s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────
+   BOUTONS — Hover lift
+───────────────────────────────────────── */
+.btn-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+.btn-lift:active {
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────
+   CARDS — Hover premium
+───────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(33,51,176,0.10);
+}
+
+/* ─────────────────────────────────────────
+   NAVBAR — Active indicator
+───────────────────────────────────────── */
+.nav-scrolled {
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
 }
