@@ -290,7 +290,72 @@
       <div class="text-left">
         <p class="font-bold text-white">M. Savadogo Salif</p>
         <p class="text-primary-light text-sm">Gérant — CTAMS Abidjan</p>
+        <a href="mailto:savadogosalif@ctams.net" class="text-primary-light/70 hover:text-white text-xs transition-colors block">savadogosalif@ctams.net</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="py-20 bg-neutral-50">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12" data-reveal="fade">
+      <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-3">FAQ</p>
+      <h2 class="text-4xl font-extrabold text-neutral-900 mb-4">Questions fréquentes</h2>
+      <p class="text-neutral-500">Tout ce que vous devez savoir avant de confier votre flotte à CTAMS.</p>
+    </div>
+
+    <div class="space-y-3" id="faq-accordion">
+
+      <div class="faq-item bg-white border border-neutral-100 rounded-2xl overflow-hidden shadow-sm" data-reveal data-delay="100">
+        <button class="faq-btn w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-neutral-900 text-sm">Quels types de véhicules prenez-vous en charge ?</span>
+          <svg class="faq-chevron w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="faq-answer hidden px-6 pb-5 text-sm text-neutral-500 leading-relaxed border-t border-neutral-100 pt-4">
+          CTAMS intervient sur tous types de véhicules : voitures légères (VL), utilitaires, camionnettes, camions poids lourds et engins de chantier. Toutes marques et tous modèles, y compris les véhicules japonais et 4x4 répandus en Côte d'Ivoire.
+        </div>
+      </div>
+
+      <div class="faq-item bg-white border border-neutral-100 rounded-2xl overflow-hidden shadow-sm" data-reveal data-delay="200">
+        <button class="faq-btn w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-neutral-900 text-sm">Les pièces de rechange sont-elles garanties ?</span>
+          <svg class="faq-chevron w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="faq-answer hidden px-6 pb-5 text-sm text-neutral-500 leading-relaxed border-t border-neutral-100 pt-4">
+          Oui. Toutes les pièces posées par CTAMS sont accompagnées d'un bon de travail et d'une garantie main-d'œuvre. Les pièces sont facturées au prix du marché, sans marge cachée. Les clients sous contrat de flotte bénéficient de 10 à 15 % de remise.
+        </div>
+      </div>
+
+      <div class="faq-item bg-white border border-neutral-100 rounded-2xl overflow-hidden shadow-sm" data-reveal data-delay="300">
+        <button class="faq-btn w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-neutral-900 text-sm">Intervenez-vous en dehors d'Abidjan ou sur site ?</span>
+          <svg class="faq-chevron w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="faq-answer hidden px-6 pb-5 text-sm text-neutral-500 leading-relaxed border-t border-neutral-100 pt-4">
+          Oui, CTAMS réalise des interventions sur site pour les clients disposant de flottes importantes ou de sites industriels. Les déplacements en dehors d'Abidjan sont possibles dans le cadre d'un contrat sur-mesure. Précisez votre localisation dans le formulaire de devis.
+        </div>
+      </div>
+
+      <div class="faq-item bg-white border border-neutral-100 rounded-2xl overflow-hidden shadow-sm" data-reveal data-delay="400">
+        <button class="faq-btn w-full flex items-center justify-between px-6 py-5 text-left" aria-expanded="false">
+          <span class="font-semibold text-neutral-900 text-sm">Que se passe-t-il si un de mes véhicules tombe en panne sur la route ?</span>
+          <svg class="faq-chevron w-5 h-5 text-neutral-400 flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="faq-answer hidden px-6 pb-5 text-sm text-neutral-500 leading-relaxed border-t border-neutral-100 pt-4">
+          Appelez-nous directement au <a href="tel:+2250777906845" class="font-semibold text-primary hover:underline">07 77 90 68 45</a>. Les clients sous contrat de flotte bénéficient d'une priorité d'intervention sous 24h. Notre équipe vous oriente rapidement vers la meilleure solution de dépannage ou de remorquage.
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -325,4 +390,30 @@
   </div>
 </section>
 
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+(function () {
+  var items = document.querySelectorAll('#faq-accordion .faq-item');
+  items.forEach(function (item) {
+    var btn     = item.querySelector('.faq-btn');
+    var answer  = item.querySelector('.faq-answer');
+    var chevron = item.querySelector('.faq-chevron');
+    btn.addEventListener('click', function () {
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      items.forEach(function (other) {
+        other.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+        other.querySelector('.faq-answer').classList.add('hidden');
+        other.querySelector('.faq-chevron').classList.remove('rotate-180');
+      });
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        answer.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      }
+    });
+  });
+})();
+</script>
 {% endblock %}

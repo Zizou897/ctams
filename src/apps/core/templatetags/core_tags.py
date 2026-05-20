@@ -11,7 +11,7 @@ def company_phone():
 
 @register.simple_tag
 def company_email():
-    return 'Sasava221@gmail.com'
+    return 'commercial@ctams.net'
 
 
 @register.simple_tag

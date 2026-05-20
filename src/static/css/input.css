@@ -9,6 +9,9 @@
   --color-secondary: #CC1111;
   --color-secondary-dark: #A50D0D;
   --font-sans: 'Inter', system-ui, sans-serif;
+  /* Durées de transition non incluses dans Tailwind v4 par défaut */
+  --transition-duration-400: 400ms;
+  --transition-duration-600: 600ms;
 }
 
 /* ─────────────────────────────────────────

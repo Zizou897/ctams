@@ -15,7 +15,7 @@ class QuoteRequestView(FormView):
             subject=f"[CTAMS] Nouvelle demande de devis — {quote.company_name}",
             message=self._build_email(quote),
             from_email=None,
-            recipient_list=["Sasava221@gmail.com"],
+            recipient_list=["commercial@ctams.net"],
         )
         return super().form_valid(form)
 

@@ -30,7 +30,7 @@ class ContactView(TemplateView):
             subject=f"[CTAMS] Message de {name}",
             message=f"De : {name} ({email} / {phone})\n\n{message}",
             from_email=None,
-            recipient_list=["Sasava221@gmail.com"],
+            recipient_list=["commercial@ctams.net"],
         )
         messages.success(request, "Votre message a été envoyé. Nous vous répondons sous 24h.")
         return redirect("core:contact")
