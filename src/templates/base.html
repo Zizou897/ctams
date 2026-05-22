@@ -13,10 +13,18 @@
   <meta property="og:description" content="{% block og_description %}Entretien de flottes, réparation toutes natures, lavage. Basé à Angré nouveau CHU, Abidjan.{% endblock %}">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_CI">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  <meta property="og:site_name" content="CTAMS">
 
   {% load static %}
+  <meta property="og:image" content="{% block og_image %}{% static 'img/og-ctams.jpg' %}{% endblock %}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{% block og_image_alt %}CTAMS — Centre Technique Auto & Multi-Services, Abidjan{% endblock %}">
+
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   {% block extra_head %}{% endblock %}
@@ -30,7 +38,7 @@
     "name": "CTAMS — Centre Technique Auto & Multi-Services",
     "description": "Garage professionnel spécialisé dans l'entretien et la réparation de flottes d'entreprises.",
     "url": "https://ctams.ci",
-    "telephone": "+22507779068 45",
+    "telephone": "+2250777906845",
     "email": "commercial@ctams.net",
     "address": {
       "@type": "PostalAddress",
@@ -89,10 +97,18 @@
 
         <!-- Liens desktop -->
         <div class="hidden md:flex items-center gap-1">
-          <a href="{% url 'core:home' %}" class="px-4 py-2 text-sm font-medium text-neutral-600 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Accueil</a>
-          <a href="{% url 'services:list' %}" class="px-4 py-2 text-sm font-medium text-neutral-600 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Services</a>
-          <a href="{% url 'core:about' %}" class="px-4 py-2 text-sm font-medium text-neutral-600 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">À propos</a>
-          <a href="{% url 'core:contact' %}" class="px-4 py-2 text-sm font-medium text-neutral-600 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Contact</a>
+          <a href="{% url 'core:home' %}"
+             class="px-4 py-2 text-sm rounded-lg transition-colors {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'home' %}text-primary bg-primary-light font-semibold{% else %}font-medium text-neutral-600 hover:text-primary hover:bg-primary-light{% endif %}"
+             {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'home' %}aria-current="page"{% endif %}>Accueil</a>
+          <a href="{% url 'services:list' %}"
+             class="px-4 py-2 text-sm rounded-lg transition-colors {% if request.resolver_match.app_name == 'services' %}text-primary bg-primary-light font-semibold{% else %}font-medium text-neutral-600 hover:text-primary hover:bg-primary-light{% endif %}"
+             {% if request.resolver_match.app_name == 'services' %}aria-current="page"{% endif %}>Services</a>
+          <a href="{% url 'core:about' %}"
+             class="px-4 py-2 text-sm rounded-lg transition-colors {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'about' %}text-primary bg-primary-light font-semibold{% else %}font-medium text-neutral-600 hover:text-primary hover:bg-primary-light{% endif %}"
+             {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'about' %}aria-current="page"{% endif %}>À propos</a>
+          <a href="{% url 'core:contact' %}"
+             class="px-4 py-2 text-sm rounded-lg transition-colors {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'contact' %}text-primary bg-primary-light font-semibold{% else %}font-medium text-neutral-600 hover:text-primary hover:bg-primary-light{% endif %}"
+             {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'contact' %}aria-current="page"{% endif %}>Contact</a>
         </div>
 
         <!-- CTA + hamburger -->
@@ -118,10 +134,22 @@
     <!-- Menu mobile -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-neutral-100 bg-white">
       <div class="px-4 py-4 space-y-1">
-        <a href="{% url 'core:home' %}" class="block px-4 py-2.5 text-sm font-medium text-neutral-700 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Accueil</a>
-        <a href="{% url 'services:list' %}" class="block px-4 py-2.5 text-sm font-medium text-neutral-700 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Services</a>
-        <a href="{% url 'core:about' %}" class="block px-4 py-2.5 text-sm font-medium text-neutral-700 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">À propos</a>
-        <a href="{% url 'core:contact' %}" class="block px-4 py-2.5 text-sm font-medium text-neutral-700 hover:text-primary hover:bg-primary-light rounded-lg transition-colors">Contact</a>
+        <a href="{% url 'core:home' %}"
+           class="block px-4 py-2.5 text-sm rounded-lg transition-colors
+           {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'home' %}text-primary bg-primary-light font-semibold{% else %}font-medium text-neutral-700 hover:text-primary hover:bg-primary-light{% endif %}"
+           {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'home' %}aria-current="page"{% endif %}>Accueil</a>
+        <a href="{% url 'services:list' %}"
+           class="block px-4 py-2.5 text-sm rounded-lg transition-colors
+           {% if request.resolver_match.app_name == 'services' %}text-primary bg-primary-light font-semibold{% else %}font-medium text-neutral-700 hover:text-primary hover:bg-primary-light{% endif %}"
+           {% if request.resolver_match.app_name == 'services' %}aria-current="page"{% endif %}>Services</a>
+        <a href="{% url 'core:about' %}"
+           class="block px-4 py-2.5 text-sm rounded-lg transition-colors
+           {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'about' %}text-primary bg-primary-light font-semibold{% else %}font-medium text-neutral-700 hover:text-primary hover:bg-primary-light{% endif %}"
+           {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'about' %}aria-current="page"{% endif %}>À propos</a>
+        <a href="{% url 'core:contact' %}"
+           class="block px-4 py-2.5 text-sm rounded-lg transition-colors
+           {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'contact' %}text-primary bg-primary-light font-semibold{% else %}font-medium text-neutral-700 hover:text-primary hover:bg-primary-light{% endif %}"
+           {% if request.resolver_match.app_name == 'core' and request.resolver_match.url_name == 'contact' %}aria-current="page"{% endif %}>Contact</a>
         <div class="pt-3 border-t border-neutral-100">
           <a href="{% url 'quotes:request' %}" class="flex items-center justify-center gap-2 bg-secondary hover:bg-secondary-dark text-white font-semibold py-3 rounded-lg text-sm transition-colors">
             Devis gratuit

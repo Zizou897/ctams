@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.urls import reverse
 
 
 class HomeView(TemplateView):
@@ -32,8 +33,7 @@ class ContactView(TemplateView):
             from_email=None,
             recipient_list=["commercial@ctams.net"],
         )
-        messages.success(request, "Votre message a été envoyé. Nous vous répondons sous 24h.")
-        return redirect("core:contact")
+        return redirect(reverse("core:contact") + "?sent=1")
 
 
 class RobotsView(View):

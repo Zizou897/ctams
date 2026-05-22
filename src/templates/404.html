@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Page introuvable — CTAMS{% endblock %}
+{% block meta_description %}La page que vous recherchez n'existe pas ou a été déplacée. Retournez à l'accueil CTAMS.{% endblock %}
+{% block og_title %}404 — Page introuvable | CTAMS{% endblock %}
+
+{% block content %}
+<section class="min-h-[70vh] flex items-center justify-center py-20">
+  <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+    <!-- Illustration SVG moteur -->
+    <div class="flex justify-center mb-10">
+      <div class="relative w-40 h-40">
+        <!-- Fond circulaire -->
+        <div class="absolute inset-0 rounded-full bg-primary-light"></div>
+        <!-- Icône clé + engrenage -->
+        <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-20 h-20 text-primary" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2.5">
+            <!-- Engrenage principal -->
+            <path stroke-linejoin="round" stroke-linecap="round"
+              d="M40 28a12 12 0 1 0 0 24 12 12 0 0 0 0-24z
+                 M40 20v-4 M40 64v-4
+                 M20 40h-4 M64 40h-4
+                 M26.34 26.34l-2.83-2.83
+                 M56.49 56.49l-2.83-2.83
+                 M23.51 56.49l2.83-2.83
+                 M53.66 26.34l2.83-2.83"/>
+            <!-- Clé anglaise -->
+            <path stroke-linejoin="round" stroke-linecap="round"
+              d="M28 52l-10 10a2 2 0 0 0 2.83 2.83L31 54.83"/>
+          </svg>
+        </div>
+        <!-- Pulsing ring -->
+        <div class="absolute inset-0 rounded-full border-2 border-primary/30 animate-ping" style="animation-duration:2.5s"></div>
+      </div>
+    </div>
+
+    <!-- Code 404 -->
+    <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-3">Erreur 404</p>
+    <h1 class="text-5xl font-extrabold text-neutral-900 mb-4 tracking-tight">Page introuvable</h1>
+    <p class="text-neutral-500 text-lg leading-relaxed mb-10 max-w-lg mx-auto">
+      Cette page a été déplacée, supprimée ou n'a jamais existé.<br>
+      Notre équipe reste disponible pour vous orienter.
+    </p>
+
+    <!-- Actions -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="{% url 'core:home' %}"
+         class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold px-7 py-3.5 rounded-xl transition-colors text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        Retour à l'accueil
+      </a>
+      <a href="{% url 'services:list' %}"
+         class="inline-flex items-center gap-2 border border-neutral-200 hover:border-primary text-neutral-700 hover:text-primary font-bold px-7 py-3.5 rounded-xl transition-colors text-sm">
+        Voir nos services
+      </a>
+      <a href="tel:+2250777906845"
+         class="inline-flex items-center gap-2 text-neutral-500 hover:text-primary font-medium text-sm transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 8V5z"/>
+        </svg>
+        07 77 90 68 45
+      </a>
+    </div>
+
+    <!-- Séparateur -->
+    <div class="mt-14 pt-8 border-t border-neutral-100">
+      <p class="text-xs text-neutral-400 mb-4 font-medium uppercase tracking-widest">Liens rapides</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
+        <a href="{% url 'core:about' %}" class="text-neutral-500 hover:text-primary transition-colors">À propos</a>
+        <a href="{% url 'core:contact' %}" class="text-neutral-500 hover:text-primary transition-colors">Contact</a>
+        <a href="{% url 'quotes:request' %}" class="text-secondary hover:text-secondary-dark font-semibold transition-colors">Devis gratuit →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
