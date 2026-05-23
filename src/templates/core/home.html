@@ -5,18 +5,40 @@
 {% block og_title %}CTAMS — Garage Professionnel pour Flottes d'Entreprises, Abidjan{% endblock %}
 {% block og_description %}Entretien préventif, réparation toutes natures, diagnostic électronique. CTAMS intervient sur vos véhicules légers et poids lourds.{% endblock %}
 
+{% load static %}
 {% block content %}
 
 <!-- ═══ HERO ═══ -->
-<section class="relative bg-primary-dark overflow-hidden flex items-center" style="min-height: 640px;">
-  <!-- Grille blueprint technique -->
-  <div class="absolute inset-0 bg-hero-grid"></div>
-  <!-- Lueur centrale gauche -->
-  <div class="absolute inset-0 opacity-30" style="background: radial-gradient(ellipse at 20% 60%, #3d55d4 0%, transparent 55%);"></div>
-  <!-- Lueur diagonale droite -->
-  <div class="absolute inset-y-0 right-0 w-1/2 opacity-25" style="background: radial-gradient(ellipse at 80% 40%, #4a5fe8 0%, transparent 65%);"></div>
-  <!-- Bord lumineux gauche vertical -->
-  <div class="absolute left-0 inset-y-0 w-px opacity-20" style="background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.6) 60%, transparent);"></div>
+<style>
+  @keyframes ctamsHeroSettle {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1); }
+  }
+  .ctams-hero-photo {
+    animation: ctamsHeroSettle 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform;
+  }
+</style>
+
+<section class="relative overflow-hidden flex items-center" style="min-height: 640px;">
+
+  <!-- Photo mobile (portrait) — visible sous md uniquement -->
+  <div class="absolute inset-0 block md:hidden overflow-hidden">
+    <img src="{% static 'img/image2.webp' %}" alt="Mécanicien CTAMS travaillant sur un moteur"
+         class="ctams-hero-photo absolute inset-0 w-full h-full object-cover object-top">
+    <div class="absolute inset-0"
+         style="background: linear-gradient(180deg, rgba(23,37,144,0.90) 0%, rgba(23,37,144,0.70) 50%, rgba(23,37,144,0.88) 100%);"></div>
+  </div>
+
+  <!-- Photo desktop (paysage) — visible sur md+ -->
+  <div class="absolute inset-0 hidden md:block overflow-hidden">
+    <img src="{% static 'img/image1.jpg' %}" alt="Mécanicien CTAMS travaillant sous un capot"
+         class="ctams-hero-photo absolute inset-0 w-full h-full object-cover"
+         style="object-position: center 40%;">
+    <!-- Gradient diagonal : cobalt dense à gauche (zone texte), s'efface vers la droite -->
+    <div class="absolute inset-0"
+         style="background: linear-gradient(105deg, rgba(23,37,144,0.97) 0%, rgba(23,37,144,0.85) 32%, rgba(23,37,144,0.50) 58%, rgba(23,37,144,0.15) 100%);"></div>
+  </div>
 
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
     <div class="max-w-2xl">

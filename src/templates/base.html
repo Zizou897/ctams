@@ -179,10 +179,17 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-neutral-900 text-neutral-400">
+  <footer class="relative overflow-hidden text-neutral-400">
+
+    <!-- Photo background garage — overlay sombre teinté cobalt -->
+    <img src="{% static 'img/image3.webp' %}" alt=""
+         class="absolute inset-0 w-full h-full object-cover"
+         style="object-position: center 60%;">
+    <div class="absolute inset-0"
+         style="background: linear-gradient(180deg, rgba(12,15,30,0.91) 0%, rgba(10,12,26,0.94) 100%);"></div>
 
     <!-- ── Corps principal ── -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
 
         <!-- Colonne 1 : Marque & contact rapide -->
@@ -352,7 +359,7 @@
     </div>
 
     <!-- ── Barre de bas de page ── -->
-    <div class="border-t border-neutral-800">
+    <div class="relative border-t border-neutral-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-neutral-600">
         <span>© {% now "Y" %} CTAMS — Centre Technique Auto & Multi-Services. Tous droits réservés.</span>
         <span class="flex items-center gap-1.5">
