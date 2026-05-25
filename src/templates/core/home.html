@@ -6,6 +6,57 @@
 {% block og_description %}Entretien préventif, réparation toutes natures, diagnostic électronique. CTAMS intervient sur vos véhicules légers et poids lourds.{% endblock %}
 
 {% load static %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["AutoRepair", "LocalBusiness"],
+  "name": "CTAMS — Centre Technique Auto & Multi-Services",
+  "url": "https://ctams.net",
+  "logo": "https://ctams.net/static/img/ctams-logo.jpg",
+  "image": "https://ctams.net/static/img/image1.jpg",
+  "telephone": "+2250777906845",
+  "email": "commercial@ctams.net",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Angré nouveau CHU, non loin de Val d'Oise",
+    "addressLocality": "Abidjan",
+    "addressRegion": "Abidjan",
+    "addressCountry": "CI"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "5.3600",
+    "longitude": "-3.9800"
+  },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "07:00",
+    "closes": "19:00"
+  }],
+  "areaServed": {
+    "@type": "City",
+    "name": "Abidjan"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Services automobiles CTAMS",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Entretien de flotte"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Réparation mécanique"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Diagnostic électronique"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tôlerie & Peinture"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Lavage & Nettoyage"}}
+    ]
+  },
+  "sameAs": []
+}
+</script>
+{% endblock %}
+
 {% block content %}
 
 <!-- ═══ HERO ═══ -->

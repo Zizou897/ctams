@@ -1,8 +1,77 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}{{ service.name }} — CTAMS Abidjan{% endblock %}
 {% block meta_description %}{{ service.description|truncatewords:25 }} Tarif : {{ service.price_display_light }}. Devis gratuit CTAMS Abidjan.{% endblock %}
 {% block og_title %}{{ service.name }} | CTAMS{% endblock %}
+{% block og_description %}{{ service.description|truncatewords:30 }}{% endblock %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "{{ service.name }}",
+  "description": "{{ service.description|escapejs }}",
+  "url": "https://ctams.net{% url 'services:detail' service.slug %}",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "CTAMS — Centre Technique Auto & Multi-Services",
+    "url": "https://ctams.net",
+    "telephone": "+2250777906845",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Angré nouveau CHU, non loin de Val d'Oise",
+      "addressLocality": "Abidjan",
+      "addressCountry": "CI"
+    }
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Abidjan",
+    "sameAs": "https://www.wikidata.org/wiki/Q3511"
+  },
+  "serviceType": "{{ service.get_category_display }}"{% if service.price_light_min and not service.price_on_quote %},
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "XOF",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "minPrice": "{{ service.price_light_min }}",{% if service.price_light_max %}
+      "maxPrice": "{{ service.price_light_max }}",{% endif %}
+      "priceCurrency": "XOF"
+    }
+  }{% endif %}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://ctams.net/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Services",
+      "item": "https://ctams.net/services/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ service.name }}",
+      "item": "https://ctams.net{% url 'services:detail' service.slug %}"
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 

@@ -10,7 +10,7 @@ ALLOWED_HOSTS = ["187.124.222.161","ctams.net", "www.ctams.net"]
 #ALLOWED_HOSTS = ["*"]
 
 DJANGO_APPS = [
-    "jazzmin",
+   
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -97,6 +97,8 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media_cdn"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+ADMIN_URL = "gestion-bo-ctams/"
 
 # Jazzmin
 JAZZMIN_SETTINGS = {

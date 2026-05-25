@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse
+from .models import ContactMessage
 
 
 class HomeView(TemplateView):
@@ -27,6 +28,10 @@ class ContactView(TemplateView):
             messages.error(request, "Veuillez remplir tous les champs obligatoires.")
             return self.get(request, *args, **kwargs)
 
+        ContactMessage.objects.create(
+            name=name, email=email, phone=phone, message=message
+        )
+
         send_mail(
             subject=f"[CTAMS] Message de {name}",
             message=f"De : {name} ({email} / {phone})\n\n{message}",
@@ -38,5 +43,5 @@ class ContactView(TemplateView):
 
 class RobotsView(View):
     def get(self, request):
-        content = "User-agent: *\nAllow: /\nSitemap: https://ctams.ci/sitemap.xml\n"
+        content = "User-agent: *\nAllow: /\nSitemap: https://ctams.net/sitemap.xml\n"
         return HttpResponse(content, content_type="text/plain")
