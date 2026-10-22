@@ -5,9 +5,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent  # src/
 config = AutoConfig(search_path=BASE_DIR)
 
 SECRET_KEY = "dev-secret-key-ctams-local-only-not-for-production"
-DEBUG = False
-ALLOWED_HOSTS = ["187.124.222.161","ctams.net", "www.ctams.net"]
-#ALLOWED_HOSTS = ["*"]
+DEBUG = config("DEBUG", default=False, cast=bool)
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS",
+    default="187.124.222.161,ctams.net,www.ctams.net",
+    cast=lambda v: [h.strip() for h in v.split(",") if h.strip()],
+)
 
 DJANGO_APPS = [
    
