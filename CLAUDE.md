@@ -7,7 +7,7 @@ Plateforme web Django pour la gestion de flotte et la proposition commerciale B2
 - Services : entretien de flottes, réparation toutes natures, lavage, vente de pièces
 - Cible : entreprises (mines, BTP, transport, ambassades, ONG) disposant de flottes
 - Zone : Abidjan & Côte d'Ivoire
-- Contact : 07 77 90 68 45 | commercial@ctams.net
+- Contact : 07 04 73 04 99 | commercial@ctams.net
 
 ## Règles du projet
 Chaque fichier spécialisé ci-dessous remplace tout prompt générique sur le sujet :
