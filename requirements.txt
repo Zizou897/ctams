@@ -3,7 +3,6 @@ Django==6.0.5
 python-decouple==3.8
 gunicorn==23.0.0
 psycopg2-binary==2.9.10
-mysqlclient==2.2.7
 Pillow==11.2.1
 
 # Admin & UI

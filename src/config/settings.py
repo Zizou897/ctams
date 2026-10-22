@@ -71,18 +71,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-# Base de données — SQLite par défaut, MySQL si USE_MYSQL=True dans .env
-if config("USE_MYSQL", default=False, cast=bool):
+# Base de données — SQLite par défaut (dev), PostgreSQL en prod (DB_ENGINE=postgresql dans .env)
+DB_ENGINE = config("DB_ENGINE", default="sqlite")
+if DB_ENGINE == "postgresql":
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.mysql",
+            "ENGINE": "django.db.backends.postgresql",
             "NAME": config("DB_NAME"),
             "USER": config("DB_USER"),
             "PASSWORD": config("DB_PASSWORD"),
             "HOST": config("DB_HOST", default="127.0.0.1"),
-            "PORT": config("DB_PORT", default="3306"),
+            "PORT": config("DB_PORT", default="5432"),
             "CONN_MAX_AGE": 60,
-            "OPTIONS": {"charset": "utf8mb4"},
         }
     }
 else:
