@@ -134,6 +134,10 @@ EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="CTAMS <contact@ctams.ci>")
 
+# Clé de l'API interne en lecture seule (/internal-api/), consommée par atelierProjet.
+# Vide par défaut => accès refusé (échec fermé) tant qu'elle n'est pas définie.
+INTERNAL_API_KEY = config("INTERNAL_API_KEY", default="")
+
 
 
 # Paramètres de sécurité — activés uniquement en production (DEBUG=False)
