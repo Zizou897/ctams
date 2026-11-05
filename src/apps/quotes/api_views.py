@@ -26,6 +26,7 @@ class QuoteRequestListAPIView(InternalAPIKeyRequiredMixin, View):
                 "phone": q.phone,
                 "vehicle_count": q.vehicle_count,
                 "service_type": q.service_type,
+                "service_type_label": q.get_service_type_display(),
                 "message": q.message,
                 "is_processed": q.is_processed,
                 "created_at": q.created_at,
