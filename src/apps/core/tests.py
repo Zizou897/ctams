@@ -1,10 +1,10 @@
 import time
 
 from django.core import mail
-from django.test import TestCase, override_settings
+from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
-from .antispam import make_timestamp_token
+from .antispam import get_client_ip, is_rate_limited, make_timestamp_token
 from .models import ContactMessage
 
 _LOCMEM_CACHE = {
@@ -154,3 +154,60 @@ class ContactFormAntiSpamTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(ContactMessage.objects.count(), 0)
+
+
+class GetClientIpTests(TestCase):
+    """IP réelle du visiteur derrière Nginx (gunicorn voit toujours 127.0.0.1)."""
+
+    def setUp(self):
+        self.factory = RequestFactory()
+
+    def test_trusts_x_real_ip_when_remote_addr_is_loopback(self):
+        request = self.factory.get("/", REMOTE_ADDR="127.0.0.1", HTTP_X_REAL_IP="203.0.113.5")
+
+        self.assertEqual(get_client_ip(request), "203.0.113.5")
+
+    def test_trusts_x_real_ip_when_remote_addr_is_ipv6_loopback(self):
+        request = self.factory.get("/", REMOTE_ADDR="::1", HTTP_X_REAL_IP="203.0.113.5")
+
+        self.assertEqual(get_client_ip(request), "203.0.113.5")
+
+    def test_ignores_x_real_ip_when_remote_addr_is_not_loopback(self):
+        request = self.factory.get("/", REMOTE_ADDR="198.51.100.9", HTTP_X_REAL_IP="203.0.113.5")
+
+        self.assertEqual(get_client_ip(request), "198.51.100.9")
+
+    def test_falls_back_to_remote_addr_when_x_real_ip_is_invalid(self):
+        request = self.factory.get("/", REMOTE_ADDR="127.0.0.1", HTTP_X_REAL_IP="pas-une-ip")
+
+        self.assertEqual(get_client_ip(request), "127.0.0.1")
+
+    def test_falls_back_to_remote_addr_when_x_real_ip_is_missing(self):
+        request = self.factory.get("/", REMOTE_ADDR="127.0.0.1")
+
+        self.assertEqual(get_client_ip(request), "127.0.0.1")
+
+
+@override_settings(CACHES=_LOCMEM_CACHE)
+class RateLimitPerRealIpTests(TestCase):
+    """La limite de fréquence distingue les visiteurs par IP réelle (X-Real-IP),
+    pas seulement par REMOTE_ADDR — toujours 127.0.0.1 derrière Nginx en prod."""
+
+    def setUp(self):
+        from django.core.cache import cache
+        cache.clear()
+        self.factory = RequestFactory()
+
+    def _request_from(self, real_ip):
+        return self.factory.get("/", REMOTE_ADDR="127.0.0.1", HTTP_X_REAL_IP=real_ip)
+
+    def test_two_real_ips_behind_the_same_loopback_have_separate_counters(self):
+        visitor_a = self._request_from("203.0.113.5")
+        visitor_b = self._request_from("203.0.113.6")
+
+        for _ in range(5):
+            self.assertFalse(is_rate_limited(visitor_a, "contact"))
+        self.assertTrue(is_rate_limited(visitor_a, "contact"))
+
+        # Un autre visiteur, derrière le même Nginx, n'est pas pénalisé.
+        self.assertFalse(is_rate_limited(visitor_b, "contact"))

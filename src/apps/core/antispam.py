@@ -2,6 +2,7 @@
 et limite de fréquence par IP. Un échec de ces contrôles ne doit jamais produire
 d'erreur visible — la vue appelante répond alors comme en cas de succès, sans
 rien enregistrer ni envoyer d'email (voir apps/core/views.py, apps/quotes/views.py)."""
+import ipaddress
 import time
 
 from django import forms
@@ -14,6 +15,27 @@ TIMESTAMP_FIELD_NAME = "horodatage"
 _SIGNING_SALT = "ctams.antispam.timestamp"
 MIN_FILL_SECONDS = 3
 MAX_FORM_AGE_SECONDS = 3600
+_LOOPBACK_ADDRESSES = {"127.0.0.1", "::1"}
+
+
+def get_client_ip(request):
+    """IP réelle du visiteur, derrière Nginx (gunicorn voit toujours 127.0.0.1).
+
+    Si la connexion vient de la machine locale (Nginx), on fait confiance à
+    ``X-Real-IP`` (transmis par Nginx) après validation de son format ; sinon
+    — connexion directe, non locale — on ne lui fait jamais confiance, pour
+    éviter qu'un visiteur l'usurpe afin de contourner la limite de fréquence.
+    """
+    remote_addr = request.META.get("REMOTE_ADDR") or ""
+    if remote_addr not in _LOOPBACK_ADDRESSES:
+        return remote_addr
+
+    real_ip = (request.META.get("HTTP_X_REAL_IP") or "").strip()
+    try:
+        ipaddress.ip_address(real_ip)
+    except ValueError:
+        return remote_addr
+    return real_ip
 
 
 def make_timestamp_token(at=None):
@@ -61,7 +83,7 @@ def is_rate_limited(request, form_key, limit=5, period_seconds=3600):
     Retourne True si la limite est dépassée : la vue doit alors répondre comme
     en cas de succès, sans rien enregistrer ni envoyer d'email.
     """
-    ip = request.META.get("REMOTE_ADDR") or "inconnu"
+    ip = get_client_ip(request) or "inconnu"
     cache_key = f"antispam:{form_key}:{ip}"
     try:
         count = cache.incr(cache_key)
