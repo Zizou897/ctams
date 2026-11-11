@@ -138,6 +138,19 @@ DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="CTAMS <contact@ctams.
 # Vide par défaut => accès refusé (échec fermé) tant qu'elle n'est pas définie.
 INTERNAL_API_KEY = config("INTERNAL_API_KEY", default="")
 
+# API publique des partenaires fournie par AtelierProjet.
+CTAMS_PARTNERS_API_URL = config("CTAMS_PARTNERS_API_URL", default="").strip()
+
+# Cache partagé entre les workers Gunicorn — utilisé par la limite de fréquence
+# des formulaires publics (apps/core/antispam.py). Basé fichiers : aucune
+# dépendance supplémentaire, partagé contrairement au cache mémoire par défaut.
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": BASE_DIR / "cache_antispam",
+    }
+}
+
 
 
 # Paramètres de sécurité — activés uniquement en production (DEBUG=False)

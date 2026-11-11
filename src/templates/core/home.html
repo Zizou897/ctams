@@ -325,6 +325,22 @@
 </section>
 {% endif %}
 
+<!-- ═══ PARTENAIRES ═══ -->
+<section class="py-14 bg-neutral-50" aria-labelledby="partners-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <h2 id="partners-heading" class="text-3xl sm:text-4xl font-extrabold text-neutral-900">Nos partenaires</h2>
+      <span class="mx-auto mt-4 block h-1 w-12 rounded-full bg-secondary" aria-hidden="true"></span>
+    </div>
+    <div id="partners-list" class="flex flex-wrap justify-center gap-4"
+         data-api-url="{{ partners_api_url }}">
+      <p id="partners-status" class="col-span-full text-center text-neutral-500" role="status" aria-live="polite">
+        Chargement des partenaires…
+      </p>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ ENGAGEMENT DU GÉRANT ═══ -->
 <section class="py-20 bg-primary-dark relative overflow-hidden">
 
@@ -496,4 +512,5 @@
   });
 })();
 </script>
+<script src="{% static 'js/partners.js' %}" defer></script>
 {% endblock %}

@@ -231,6 +231,12 @@
         <form id="contact-form" method="post" class="space-y-5">
           {% csrf_token %}
 
+          <!-- Honeypot anti-spam : invisible et jamais rempli par un humain -->
+          <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+            {{ form.site_web }}
+          </div>
+          {{ form.horodatage }}
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
               <label for="name" class="block text-xs font-bold text-neutral-400 uppercase tracking-widest mb-2">

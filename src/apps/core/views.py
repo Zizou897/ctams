@@ -1,14 +1,22 @@
 from django.views.generic import TemplateView, View
 from django.http import HttpResponse
+from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse
-from .models import ContactMessage
+from .antispam import is_rate_limited, make_timestamp_token
+from .forms import ContactForm
+from .forms_utils import first_error_message
 
 
 class HomeView(TemplateView):
     template_name = "core/home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["partners_api_url"] = settings.CTAMS_PARTNERS_API_URL
+        return context
 
 
 class AboutView(TemplateView):
@@ -18,27 +26,37 @@ class AboutView(TemplateView):
 class ContactView(TemplateView):
     template_name = "core/contact.html"
 
-    def post(self, request, *args, **kwargs):
-        name = request.POST.get("name", "").strip()
-        email = request.POST.get("email", "").strip()
-        phone = request.POST.get("phone", "").strip()
-        message = request.POST.get("message", "").strip()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.setdefault("form", ContactForm(initial={"horodatage": make_timestamp_token()}))
+        return context
 
-        if not all([name, email, message]):
-            messages.error(request, "Veuillez remplir tous les champs obligatoires.")
+    def post(self, request, *args, **kwargs):
+        success_url = reverse("core:contact") + "?sent=1"
+
+        # Limite de fréquence par IP : dépassée => réponse silencieuse, rien n'est fait.
+        if is_rate_limited(request, "contact"):
+            return redirect(success_url)
+
+        form = ContactForm(request.POST)
+
+        # Honeypot / délai de remplissage : robot détecté => réponse silencieuse.
+        if form.is_bot():
+            return redirect(success_url)
+
+        if not form.is_valid():
+            messages.error(request, first_error_message(form))
             return self.get(request, *args, **kwargs)
 
-        ContactMessage.objects.create(
-            name=name, email=email, phone=phone, message=message
-        )
+        contact = form.save()
 
         send_mail(
-            subject=f"[CTAMS] Message de {name}",
-            message=f"De : {name} ({email} / {phone})\n\n{message}",
+            subject=f"[CTAMS] Message de {contact.name}",
+            message=f"De : {contact.name} ({contact.email} / {contact.phone})\n\n{contact.message}",
             from_email=None,
             recipient_list=["commercial@ctams.net"],
         )
-        return redirect(reverse("core:contact") + "?sent=1")
+        return redirect(success_url)
 
 
 class RobotsView(View):

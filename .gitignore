@@ -64,6 +64,7 @@ static_cdn/
 media_cdn/
 staticfiles/
 media/
+cache_antispam/
 
 # Tailwind CLI (binaire lourd, pas à commiter)
 tailwindcss.exe
